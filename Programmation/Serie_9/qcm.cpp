@@ -11,22 +11,18 @@ typedef vector<QCM> Examen;
 
 void affiche(QCM qcm);
 int demander_nombre(int a, int b);
-bool poser_question(QCM qcm);
-void creer_examen(Examen exam);
+int poser_question(QCM qcm);
+Examen creer_examen();
 
 int main(){
-    Examen exam;
-    creer_examen(exam);
+    Examen exam(creer_examen());
     int resultat(0);
-    bool score(false);
     for (int i(0); i < exam.size(); ++i){
-        poser_question(exam[i]);
-        if (score) {
-            resultat += 1;
-        }
+        if (poser_question(exam[i]) == exam[i].sol)
+        ++resultat;
     }
     cout << "Vous avez répondu juste à " 
-    << resultat << "questions ! votre note est de " << resultat << "/" << exam.size() << endl;
+    << resultat << " questions ! votre note est de " << resultat << "/" << exam.size() << endl;
 return 0;
 }
 
@@ -51,31 +47,25 @@ int demander_nombre(int a, int b){
 return res;
 }
 
-bool poser_question(QCM qcm){
-    int res;
-    bool score(false);
+int poser_question(QCM qcm){
     affiche(qcm);
-    demander_nombre(1, qcm.reponses.size());
-    cout << res << endl;
-    if (res == qcm.sol) {
-        score = true;
-    }
-return score;
+return demander_nombre(1, qcm.reponses.size());
 }
 
-void creer_examen(Examen exam){
-    exam[0] = { "Combien de dents possède un éléphant adulte",
+Examen creer_examen(){
+    return {
+      { "Combien de dents possède un éléphant adulte",
       { "32", "de 6 à 10", "beaucoup", "24", "2" },
       2
     },
-    exam[1] = { "Laquelle des instructions suivantes est un prototype de fonction",
+    { "Laquelle des instructions suivantes est un prototype de fonction",
       { "int f(0);"     ,
         "int f(int 0);" ,
         "int f(int i);" ,
         "int f(i);"     },
       3
     },
-    exam[3] ={ "Qui pose des questions stupides",
+    { "Qui pose des questions stupides",
       { "le prof. de math",
         "mon copain/ma copine",
         "le prof. de physique",
@@ -84,5 +74,6 @@ void creer_examen(Examen exam){
         "personne, il n'y a pas de question stupide",
         "les sondages" } ,
       6 
-    };
+    }
+};
 }

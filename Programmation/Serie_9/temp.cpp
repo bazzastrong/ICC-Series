@@ -35,7 +35,7 @@ Mesure find_max_record(const Records& records){
             date_tmax = records[j].date;
         }
     }
-return t_max
+return t_max;
 }
  
  
@@ -101,7 +101,5 @@ int main(){
          << " avec un écart de "
          << delta << " degrés"
          << endl;
-     
-         
 return 0;
 }
