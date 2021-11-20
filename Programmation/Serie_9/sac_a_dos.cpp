@@ -33,7 +33,7 @@ void solve_greedy(vector<Object> const& objects, double maximum_weight){
   
 double solve_exact_recursive(vector<Object> const& objects, size_t start, double& remaining_weight){
   double best_value(0.0);
-  if ((not objects.empty()) and (start < objects.size())) {
+  if ((not(objects.empty())) & (start < objects.size())) {
     double best_remaining_weight(remaining_weight);
     best_value = solve_exact_recursive(objects, start+1, best_remaining_weight);
     if (objects[start].weight <= remaining_weight) {
